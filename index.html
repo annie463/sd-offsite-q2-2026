@@ -288,6 +288,7 @@
     <a href="#goals">Goals</a>
     <a href="#agenda">Agenda</a>
     <a href="#weather">Weather</a>
+    <a href="#groups">Groups</a>
     <a href="#packing">Packing</a>
   </div>
 </nav>
@@ -605,6 +606,290 @@
   </div>
 </section>
 
+
+
+<hr class="divider">
+
+<!-- GROUPS -->
+<section id="groups">
+  <div class="container">
+    <p class="section-label">Wednesday, June 10</p>
+    <h2 class="section-heading">Your Small Group</h2>
+    <p style="color:var(--muted);font-size:14px;margin-top:-28px;margin-bottom:32px;">Find your name below to see your group assignment for the Improving CogentOS working session. Groups are cross-functional to mix perspectives.</p>
+
+    <!-- Search -->
+    <div style="position:relative;margin-bottom:32px;">
+      <input
+        id="group-search"
+        type="text"
+        placeholder="Type your name to find your group..."
+        oninput="searchGroup(this.value)"
+        style="width:100%;padding:14px 20px;border:2px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color 0.2s;background:white;"
+        onfocus="this.style.borderColor='var(--mid)'"
+        onblur="this.style.borderColor='var(--border)'"
+      />
+    </div>
+
+    <!-- Search result -->
+    <div id="group-result" style="display:none;margin-bottom:32px;"></div>
+
+    <!-- All groups grid -->
+    <div id="all-groups" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+
+      <div class="gcard" data-group="1">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#0b2545,#1a6ea8);">
+          <span class="gnum">Group 1</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Peyman Manikashani</span><span class="grole">Eng &mdash; Data Platform</span></li>
+          <li><span class="gname">Karan Gugle</span><span class="grole">Eng &mdash; Agents</span></li>
+          <li><span class="gname">Neil Joshi</span><span class="grole">Eng &mdash; Infra / Security</span></li>
+          <li><span class="gname">Aziz Kapadia</span><span class="grole">Sales Engineer</span></li>
+          <li><span class="gname">Grace Hua</span><span class="grole">BizOps</span></li>
+        </ul>
+      </div>
+
+      <div class="gcard" data-group="2">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#1a6ea8,#2eb8e6);">
+          <span class="gnum">Group 2</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Vignesh Shankar</span><span class="grole">Eng &mdash; Data Platform</span></li>
+          <li><span class="gname">Sophia Wu</span><span class="grole">Eng &mdash; Agents</span></li>
+          <li><span class="gname">Joseph Jin</span><span class="grole">Eng &mdash; FDE</span></li>
+          <li><span class="gname">Brian Ruth</span><span class="grole">Account Executive</span></li>
+          <li><span class="gname">Lauren England</span><span class="grole">Customer Success</span></li>
+        </ul>
+      </div>
+
+      <div class="gcard" data-group="3">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#0fa3b1,#2eb8e6);">
+          <span class="gnum">Group 3</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Simon Weigl</span><span class="grole">Eng &mdash; Data Platform</span></li>
+          <li><span class="gname">Larsen Weigle</span><span class="grole">Eng &mdash; AI Platform</span></li>
+          <li><span class="gname">Chaitanya Manchikanti</span><span class="grole">Eng &mdash; Infra / Security</span></li>
+          <li><span class="gname">Justin Whitcomb</span><span class="grole">Account Executive</span></li>
+          <li><span class="gname">Alexander Semien</span><span class="grole">Growth</span></li>
+        </ul>
+      </div>
+
+      <div class="gcard" data-group="4">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#2d6a4f,#40916c);">
+          <span class="gnum">Group 4</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Vinay Padma</span><span class="grole">Eng &mdash; Data Platform</span></li>
+          <li><span class="gname">Akash Mahesh</span><span class="grole">Eng &mdash; Agents</span></li>
+          <li><span class="gname">Yash Jain</span><span class="grole">Eng &mdash; FDE</span></li>
+          <li><span class="gname">Ryan Marasco</span><span class="grole">Sales Engineer</span></li>
+          <li><span class="gname">Haris Sohail</span><span class="grole">Product Management</span></li>
+        </ul>
+      </div>
+
+      <div class="gcard" data-group="5">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#6d28d9,#a78bfa);">
+          <span class="gnum">Group 5</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Max Mikhaylov</span><span class="grole">Eng &mdash; Data Platform</span></li>
+          <li><span class="gname">Jia Zeng</span><span class="grole">Eng &mdash; AI Platform</span></li>
+          <li><span class="gname">Mariam McLellan</span><span class="grole">Eng &mdash; Infra / Security</span></li>
+          <li><span class="gname">Cameron Coles</span><span class="grole">Marketing</span></li>
+          <li><span class="gname">Traci Byrne</span><span class="grole">Sales &mdash; Partnerships</span></li>
+        </ul>
+      </div>
+
+      <div class="gcard" data-group="6">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#b45309,#f59e0b);">
+          <span class="gnum">Group 6</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Sara Reddy</span><span class="grole">Eng &mdash; Data Platform</span></li>
+          <li><span class="gname">Marco Schwiebert</span><span class="grole">Eng &mdash; Agents</span></li>
+          <li><span class="gname">Hiep Chu</span><span class="grole">Eng &mdash; Research</span></li>
+          <li><span class="gname">Sri Maddineni</span><span class="grole">Sales Engineer</span></li>
+          <li><span class="gname">Steven Do</span><span class="grole">Recruiting</span></li>
+        </ul>
+      </div>
+
+      <div class="gcard" data-group="7">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#be185d,#f472b6);">
+          <span class="gnum">Group 7</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Rodrigo Alves Vieira</span><span class="grole">Eng &mdash; Data Platform</span></li>
+          <li><span class="gname">Henry Yi</span><span class="grole">Eng &mdash; AI Platform</span></li>
+          <li><span class="gname">Nina Boord</span><span class="grole">Eng &mdash; FDE</span></li>
+          <li><span class="gname">Justin Jancaric</span><span class="grole">Account Executive</span></li>
+          <li><span class="gname">Sourabh Katti</span><span class="grole">Product Manager</span></li>
+        </ul>
+      </div>
+
+      <div class="gcard" data-group="8">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#0e7490,#06b6d4);">
+          <span class="gnum">Group 8</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Riya Chakraborty</span><span class="grole">Eng &mdash; Data Platform</span></li>
+          <li><span class="gname">Sagar Maheshwari</span><span class="grole">Eng &mdash; AI Platform</span></li>
+          <li><span class="gname">Stan Liu</span><span class="grole">Eng &mdash; Agents</span></li>
+          <li><span class="gname">Bala Choubey</span><span class="grole">Sales Engineer</span></li>
+          <li><span class="gname">Hyun Kim</span><span class="grole">Design</span></li>
+        </ul>
+      </div>
+
+      <div class="gcard" data-group="9">
+        <div class="gcard-header" style="background:linear-gradient(135deg,#991b1b,#ef4444);">
+          <span class="gnum">Group 9</span>
+        </div>
+        <ul class="gmembers">
+          <li><span class="gname">Anirudh Ravula</span><span class="grole">Eng &mdash; AI Platform</span></li>
+          <li><span class="gname">Yaoyang Lin</span><span class="grole">Eng &mdash; AI Platform</span></li>
+          <li><span class="gname">Annie Na</span><span class="grole">Ops</span></li>
+          <li><span class="gname">Rebecca Brock</span><span class="grole">Account Executive</span></li>
+          <li><span class="gname">Andrew Cuzzone</span><span class="grole">Growth</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .gcard { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(11,37,69,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+  .gcard:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(11,37,69,0.14); }
+  .gcard.highlight { box-shadow: 0 0 0 3px var(--peach), 0 8px 28px rgba(11,37,69,0.2); transform: translateY(-4px); }
+  .gcard-header { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .gnum { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: white; }
+  .gmembers { list-style: none; padding: 12px 0; }
+  .gmembers li { padding: 10px 20px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 2px; transition: background 0.15s; }
+  .gmembers li:last-child { border-bottom: none; }
+  .gmembers li:hover { background: var(--sky); }
+  .gmembers li.me { background: #fffbeb; }
+  .gname { font-size: 14px; font-weight: 600; color: var(--text); }
+  .grole { font-size: 12px; color: var(--muted); }
+
+  #group-result .result-card {
+    background: linear-gradient(135deg, var(--deep), var(--mid));
+    border-radius: 16px; padding: 28px 32px; color: white;
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  }
+  #group-result .result-group-num {
+    font-family: 'Fraunces', serif; font-size: 64px; font-weight: 900;
+    color: var(--peach); line-height: 1; flex-shrink: 0;
+  }
+  #group-result .result-info { flex: 1; }
+  #group-result .result-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--mint); margin-bottom: 4px; }
+  #group-result .result-name { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; margin-bottom: 4px; }
+  #group-result .result-role { font-size: 14px; color: var(--mint); margin-bottom: 16px; }
+  #group-result .result-members { display: flex; flex-wrap: wrap; gap: 8px; }
+  #group-result .result-member { background: rgba(255,255,255,0.12); border-radius: 50px; padding: 4px 14px; font-size: 13px; color: white; }
+  #group-result .result-member.is-you { background: var(--peach); color: white; font-weight: 600; }
+</style>
+
+<script>
+const members = [
+  {name:"Peyman Manikashani",role:"Eng — Data Platform",group:1},
+  {name:"Karan Gugle",role:"Eng — Agents",group:1},
+  {name:"Neil Joshi",role:"Eng — Infra / Security",group:1},
+  {name:"Aziz Kapadia",role:"Sales Engineer",group:1},
+  {name:"Grace Hua",role:"BizOps",group:1},
+  {name:"Vignesh Shankar",role:"Eng — Data Platform",group:2},
+  {name:"Sophia Wu",role:"Eng — Agents",group:2},
+  {name:"Joseph Jin",role:"Eng — FDE",group:2},
+  {name:"Brian Ruth",role:"Account Executive",group:2},
+  {name:"Lauren England",role:"Customer Success",group:2},
+  {name:"Simon Weigl",role:"Eng — Data Platform",group:3},
+  {name:"Larsen Weigle",role:"Eng — AI Platform",group:3},
+  {name:"Chaitanya Manchikanti",role:"Eng — Infra / Security",group:3},
+  {name:"Justin Whitcomb",role:"Account Executive",group:3},
+  {name:"Alexander Semien",role:"Growth",group:3},
+  {name:"Vinay Padma",role:"Eng — Data Platform",group:4},
+  {name:"Akash Mahesh",role:"Eng — Agents",group:4},
+  {name:"Yash Jain",role:"Eng — FDE",group:4},
+  {name:"Ryan Marasco",role:"Sales Engineer",group:4},
+  {name:"Haris Sohail",role:"Product Management",group:4},
+  {name:"Max Mikhaylov",role:"Eng — Data Platform",group:5},
+  {name:"Jia Zeng",role:"Eng — AI Platform",group:5},
+  {name:"Mariam McLellan",role:"Eng — Infra / Security",group:5},
+  {name:"Cameron Coles",role:"Marketing",group:5},
+  {name:"Traci Byrne",role:"Sales — Partnerships",group:5},
+  {name:"Sara Reddy",role:"Eng — Data Platform",group:6},
+  {name:"Marco Schwiebert",role:"Eng — Agents",group:6},
+  {name:"Hiep Chu",role:"Eng — Research",group:6},
+  {name:"Sri Maddineni",role:"Sales Engineer",group:6},
+  {name:"Steven Do",role:"Recruiting",group:6},
+  {name:"Rodrigo Alves Vieira",role:"Eng — Data Platform",group:7},
+  {name:"Henry Yi",role:"Eng — AI Platform",group:7},
+  {name:"Nina Boord",role:"Eng — FDE",group:7},
+  {name:"Justin Jancaric",role:"Account Executive",group:7},
+  {name:"Sourabh Katti",role:"Product Manager",group:7},
+  {name:"Riya Chakraborty",role:"Eng — Data Platform",group:8},
+  {name:"Sagar Maheshwari",role:"Eng — AI Platform",group:8},
+  {name:"Stan Liu",role:"Eng — Agents",group:8},
+  {name:"Bala Choubey",role:"Sales Engineer",group:8},
+  {name:"Hyun Kim",role:"Design",group:8},
+  {name:"Anirudh Ravula",role:"Eng — AI Platform",group:9},
+  {name:"Yaoyang Lin",role:"Eng — AI Platform",group:9},
+  {name:"Annie Na",role:"Ops",group:9},
+  {name:"Rebecca Brock",role:"Account Executive",group:9},
+  {name:"Andrew Cuzzone",role:"Growth",group:9},
+];
+
+const groupMembers = (g) => members.filter(m => m.group === g);
+
+const groupColors = {
+  1:"#0b2545",2:"#1a6ea8",3:"#0fa3b1",4:"#2d6a4f",
+  5:"#6d28d9",6:"#b45309",7:"#be185d",8:"#0e7490",9:"#991b1b"
+};
+
+function searchGroup(val) {
+  const result = document.getElementById("group-result");
+  if (!val || val.length < 2) {
+    result.style.display = "none";
+    document.querySelectorAll(".gcard").forEach(c => { c.classList.remove("highlight"); c.style.opacity = "1"; });
+    document.querySelectorAll(".gmembers li").forEach(li => li.classList.remove("me"));
+    return;
+  }
+  const q = val.toLowerCase().trim();
+  const match = members.find(m => m.name.toLowerCase().includes(q));
+  if (match) {
+    const teammates = groupMembers(match.group).filter(m => m.name !== match.name);
+    result.innerHTML = `
+      <div class="result-card">
+        <div class="result-group-num">${match.group}</div>
+        <div class="result-info">
+          <div class="result-label">Your Group Assignment</div>
+          <div class="result-name">${match.name}</div>
+          <div class="result-role">${match.role}</div>
+          <div class="result-members">
+            <span class="result-member is-you">${match.name}</span>
+            ${teammates.map(t => `<span class="result-member">${t.name}</span>`).join("")}
+          </div>
+        </div>
+      </div>`;
+    result.style.display = "block";
+    document.querySelectorAll(".gcard").forEach(c => {
+      const isMatch = parseInt(c.dataset.group) === match.group;
+      c.classList.toggle("highlight", isMatch);
+      c.style.opacity = isMatch ? "1" : "0.4";
+    });
+    document.querySelectorAll(".gmembers li").forEach(li => {
+      const nameEl = li.querySelector(".gname");
+      if (nameEl && nameEl.textContent.trim() === match.name) li.classList.add("me");
+      else li.classList.remove("me");
+    });
+    const card = document.querySelector(`.gcard[data-group="${match.group}"]`);
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  } else {
+    result.innerHTML = `<div style="background:var(--sky);border-radius:12px;padding:20px 24px;color:var(--muted);font-size:14px;">No match found for "<strong>${val}</strong>" &mdash; try your first or last name.</div>`;
+    result.style.display = "block";
+    document.querySelectorAll(".gcard").forEach(c => { c.classList.remove("highlight"); c.style.opacity = "1"; });
+  }
+}
+</script>
 
 <hr class="divider">
 
