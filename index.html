@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cogent SD Offsite 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep:    #0b2545;
+    --mid:     #1a6ea8;
+    --bright:  #2eb8e6;
+    --teal:    #0fa3b1;
+    --sand:    #fdf6ec;
+    --peach:   #f4a261;
+    --coral:   #e76f51;
+    --mint:    #d4f1f4;
+    --sky:     #e8f6fd;
+    --white:   #ffffff;
+    --text:    #0b2545;
+    --muted:   #6b7c93;
+    --border:  #e2ecf5;
+    --tag-session: #dbeafe; --tag-session-t: #1d4ed8;
+    --tag-food:    #fef9c3; --tag-food-t:    #854d0e;
+    --tag-act:     #dcfce7; --tag-act-t:     #166534;
+    --tag-social:  #fce7f3; --tag-social-t:  #9d174d;
+    --tag-travel:  #f1f5f9; --tag-travel-t:  #475569;
+    --tag-speaker: #ede9fe; --tag-speaker-t: #6d28d9;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--deep);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px; height: 56px;
+    box-shadow: 0 2px 16px rgba(11,37,69,0.25);
+  }
+  .nav-brand { font-family: 'Fraunces', serif; font-size: 18px; color: white; font-weight: 600; letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 500;
+    padding: 6px 14px; border-radius: 6px; text-decoration: none;
+    transition: background 0.2s, color 0.2s; letter-spacing: 0.3px;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,0.12); color: white; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--deep) 0%, #0d3a6e 35%, var(--mid) 65%, var(--bright) 100%);
+    min-height: 88vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 60px 24px 100px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 110%, rgba(46,184,230,0.18) 0%, transparent 70%);
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--peach); font-weight: 600; margin-bottom: 20px;
+    background: rgba(244,162,97,0.15); border: 1px solid rgba(244,162,97,0.3);
+    padding: 6px 18px; border-radius: 50px; display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-weight: 900;
+    font-size: clamp(60px, 12vw, 130px); line-height: 0.88;
+    color: white; text-shadow: 0 4px 40px rgba(0,0,0,0.2);
+  }
+  .hero h1 em { color: var(--peach); font-style: italic; }
+  .hero-sub {
+    margin-top: 24px; color: var(--mint); font-size: 17px;
+    font-weight: 300; letter-spacing: 1px;
+  }
+  .hero-chips {
+    display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; justify-content: center;
+  }
+  .chip {
+    background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 50px;
+    padding: 8px 20px; color: white; font-size: 13px; font-weight: 500;
+  }
+  .chip strong { color: var(--peach); }
+  .wave-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 72px 24px; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--mid); font-weight: 600; margin-bottom: 8px;
+  }
+  .section-heading {
+    font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 42px);
+    font-weight: 600; color: var(--deep); margin-bottom: 40px; line-height: 1.1;
+  }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* ── ACCOMMODATION ── */
+  #accommodation { background: var(--white); }
+  .hotel-card {
+    background: linear-gradient(135deg, var(--deep), #134e8c);
+    border-radius: 20px; padding: 40px; color: white;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  }
+  .hotel-name { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; margin-bottom: 6px; }
+  .hotel-addr { color: var(--mint); font-size: 14px; margin-bottom: 24px; }
+  .hotel-row { display: flex; flex-direction: column; gap: 14px; }
+  .hotel-item label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); display: block; margin-bottom: 2px; }
+  .hotel-item span { font-size: 15px; color: white; font-weight: 500; }
+  .hotel-map-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--peach); color: white; border-radius: 10px;
+    padding: 10px 20px; font-size: 13px; font-weight: 600;
+    text-decoration: none; margin-top: 20px; transition: background 0.2s;
+  }
+  .hotel-map-btn:hover { background: var(--coral); }
+
+  /* ── GOALS ── */
+  #goals { background: var(--sky); }
+  .goal-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 20px; }
+  .goal-card {
+    background: white; border-radius: 16px; padding: 28px;
+    border-top: 4px solid var(--bright);
+    box-shadow: 0 2px 16px rgba(11,37,69,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .goal-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(11,37,69,0.12); }
+  .goal-card:nth-child(2) { border-color: var(--peach); }
+  .goal-card:nth-child(3) { border-color: var(--teal); }
+  .goal-card-title { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600; color: var(--deep); margin-bottom: 8px; }
+  .goal-card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  /* ── WEATHER ── */
+  #weather { background: linear-gradient(135deg, var(--deep) 0%, #0d3a6e 100%); }
+  #weather .section-label { color: var(--mint); }
+  #weather .section-heading { color: white; }
+  #weather .section-sub { color: var(--mint); font-size: 14px; margin-top: -28px; margin-bottom: 36px; font-weight: 300; }
+  .weather-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .wcard {
+    flex: 1; min-width: 100px;
+    background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 16px;
+    padding: 20px 14px; text-align: center;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .wcard:hover { transform: translateY(-4px); background: rgba(255,255,255,0.14); }
+  .wcard.offsite { background: rgba(244,162,97,0.2); border-color: rgba(244,162,97,0.4); }
+  .wday { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--mint); margin-bottom: 4px; }
+  .wdate { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .wtemp { font-family: 'Fraunces', serif; font-size: 28px; color: white; font-weight: 600; }
+  .wcond { font-size: 12px; color: var(--mint); margin-top: 4px; }
+  .wlabel { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--peach); margin-top: 8px; font-weight: 600; }
+
+  /* ── AGENDA ── */
+  #agenda { background: var(--white); }
+  .day-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
+  .day-btn {
+    background: var(--sky); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 8px 16px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--muted); transition: all 0.2s;
+  }
+  .day-btn:hover { border-color: var(--mid); color: var(--mid); }
+  .day-btn.active { background: var(--deep); border-color: var(--deep); color: white; }
+  .day-btn.offsite-btn.active { background: var(--coral); border-color: var(--coral); }
+  .day-btn.offsite-btn { border-color: rgba(231,111,81,0.4); color: var(--coral); }
+
+  .day-view { display: none; }
+  .day-view.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .day-hdr { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+  .day-title-text { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; color: var(--deep); }
+  .day-type-badge { padding: 4px 14px; border-radius: 50px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+  .badge-arrive  { background: var(--mint); color: var(--teal); }
+  .badge-cowork  { background: #dbeafe; color: #1d4ed8; }
+  .badge-offsite { background: #fee2e2; color: var(--coral); }
+
+  .day-goal-bar {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(90deg, var(--deep), var(--mid));
+    color: white; padding: 8px 18px; border-radius: 8px;
+    font-size: 13px; font-weight: 500; margin: 12px 0 20px; letter-spacing: 0.3px;
+  }
+  .day-note-bar {
+    background: var(--sky); border-left: 3px solid var(--bright);
+    padding: 10px 16px; border-radius: 0 8px 8px 0;
+    font-size: 13px; color: var(--muted); margin-bottom: 20px; font-style: italic;
+  }
+
+  /* accordion items */
+  .agenda-item {
+    border: 1.5px solid var(--border); border-radius: 14px;
+    margin-bottom: 10px; overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .agenda-item:hover { box-shadow: 0 4px 16px rgba(11,37,69,0.08); }
+  .agenda-trigger {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px; text-align: left; font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .agenda-trigger:hover { background: var(--sky); }
+  .agenda-trigger.open { background: var(--sky); }
+  .atime {
+    min-width: 140px; font-size: 13px; color: var(--mid);
+    font-weight: 600; flex-shrink: 0;
+  }
+  .atitle { flex: 1; font-size: 15px; font-weight: 600; color: var(--deep); }
+  .atag {
+    padding: 3px 10px; border-radius: 50px; font-size: 10px;
+    font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; flex-shrink: 0;
+  }
+  .t-session { background: var(--tag-session); color: var(--tag-session-t); }
+  .t-food    { background: var(--tag-food);    color: var(--tag-food-t); }
+  .t-act     { background: var(--tag-act);     color: var(--tag-act-t); }
+  .t-social  { background: var(--tag-social);  color: var(--tag-social-t); }
+  .t-travel  { background: var(--tag-travel);  color: var(--tag-travel-t); }
+  .t-speaker { background: var(--tag-speaker); color: var(--tag-speaker-t); }
+  .achevron { color: var(--muted); font-size: 14px; transition: transform 0.2s; flex-shrink: 0; }
+  .agenda-trigger.open .achevron { transform: rotate(180deg); }
+
+  .agenda-body { display: none; padding: 0 12px 18px 12px; border-top: 1px solid var(--border); }
+  .agenda-body.open { display: block; }
+  .agenda-meta { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-weight: 600; }
+  .meta-val { font-size: 14px; color: var(--text); font-weight: 500; }
+  .agenda-bullets { margin-top: 12px; padding-left: 18px; }
+  .agenda-bullets li { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 2px; }
+  .agenda-note { margin-top: 10px; font-size: 13px; color: var(--muted); font-style: italic; }
+
+  /* ── PACKING ── */
+  #packing { background: var(--sky); }
+  .pack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .pack-card {
+    background: white; border-radius: 16px; padding: 24px;
+    box-shadow: 0 2px 12px rgba(11,37,69,0.07);
+  }
+  .pack-card-title {
+    font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600;
+    color: var(--deep); margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .pack-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .pack-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--muted); line-height: 1.4;
+  }
+  .pack-list li::before {
+    content: ''; flex-shrink: 0; width: 16px; height: 16px; margin-top: 1px;
+    border: 1.5px solid var(--border); border-radius: 4px; background: white;
+  }
+  .pack-note { font-size: 12px; color: var(--mid); font-style: italic; margin-left: 26px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 40px 24px; font-size: 13px;
+  }
+  footer strong { color: white; font-family: 'Fraunces', serif; font-size: 20px; display: block; margin-bottom: 6px; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hotel-card { grid-template-columns: 1fr; }
+    .atime { min-width: 90px; font-size: 12px; }
+    .day-nav { gap: 6px; }
+    .day-btn { padding: 6px 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<style>
+#pw-overlay {
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,#0b2545 0%,#1a6ea8 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Sans',sans-serif;
+}
+#pw-box {
+  background:white;border-radius:20px;padding:48px 40px;
+  max-width:400px;width:90%;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+}
+#pw-title {
+  font-family:'Fraunces',serif;font-size:28px;font-weight:700;
+  color:#0b2545;margin-bottom:6px;
+}
+#pw-sub { font-size:14px;color:#6b7c93;margin-bottom:28px; }
+#pw-input {
+  width:100%;padding:14px 18px;border:2px solid #e2ecf5;
+  border-radius:10px;font-size:15px;font-family:'DM Sans',sans-serif;
+  color:#0b2545;outline:none;margin-bottom:12px;
+  transition:border-color 0.2s;box-sizing:border-box;
+}
+#pw-input:focus { border-color:#1a6ea8; }
+#pw-btn {
+  width:100%;padding:14px;background:#0b2545;color:white;
+  border:none;border-radius:10px;font-size:15px;font-weight:600;
+  font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;
+}
+#pw-btn:hover { background:#1a6ea8; }
+#pw-error {
+  color:#e76f51;font-size:13px;margin-top:8px;display:none;
+}
+</style>
+<div id="pw-overlay">
+  <div id="pw-box">
+    <div id="pw-title">Cogent SD Offsite</div>
+    <div id="pw-sub">Enter the password to continue</div>
+    <input id="pw-input" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()"/>
+    <button id="pw-btn" onclick="checkPw()">Enter</button>
+    <div id="pw-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+<script>
+(function() {
+  if (sessionStorage.getItem("offsite_auth") === "true") {
+    document.addEventListener("DOMContentLoaded", function() {
+      var el = document.getElementById("pw-overlay");
+      if (el) el.style.display = "none";
+    });
+  }
+})();
+function checkPw() {
+  var val = document.getElementById("pw-input").value;
+  if (val === "cogenteersrock") {
+    sessionStorage.setItem("offsite_auth", "true");
+    document.getElementById("pw-overlay").style.display = "none";
+  } else {
+    document.getElementById("pw-error").style.display = "block";
+    document.getElementById("pw-input").value = "";
+    document.getElementById("pw-input").focus();
+  }
+}
+</script>
+
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Cogent SD Offsite</span>
+  <div class="nav-links">
+    <a href="#accommodation">Stay</a>
+    <a href="#goals">Goals</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#weather">Weather</a>
+    <a href="#groups">Groups</a>
+    <a href="#packing">Packing</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Q2 2026</div>
+  <h1>San<br><em>Diego</em></h1>
+  <p class="hero-sub">June 7 &ndash; 12, 2026 &middot; Alma San Diego Downtown</p>
+  <div class="hero-chips">
+    <div class="chip"><strong>73&deg;F</strong> &amp; Sunny</div>
+  </div>
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;">
+      <path fill="#fdf6ec" d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ACCOMMODATION -->
+<section id="accommodation">
+  <div class="container">
+    <p class="section-label">Where We&rsquo;re Staying</p>
+    <h2 class="section-heading">Accommodation</h2>
+    <div class="hotel-card">
+      <div>
+        <div class="hotel-name">Alma San Diego Downtown</div>
+        <div class="hotel-addr">1047 Fifth Avenue, San Diego, CA 92101</div>
+        <a class="hotel-map-btn" href="https://maps.google.com/?q=1047+Fifth+Avenue+San+Diego+CA" target="_blank">Open in Maps &nbsp;&rarr;</a>
+      </div>
+      <div class="hotel-row">
+        <div class="hotel-item"><label>Check-in</label><span>Sunday, June 7</span></div>
+        <div class="hotel-item"><label>Check-out</label><span>Friday, June 12 &mdash; 11:00 AM</span></div>
+        <div class="hotel-item"><label>Duration</label><span>5 nights</span></div>
+        <div class="hotel-item"><label>Note</label><span>Bring bags to Octavio Ballroom on Friday before the morning session</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- GOALS -->
+<section id="goals">
+  <div class="container">
+    <p class="section-label">Why We&rsquo;re Here</p>
+    <h2 class="section-heading">Offsite Goals</h2>
+    <div class="goal-cards">
+      <div class="goal-card">
+        <div class="goal-card-title">Productivity Sprint</div>
+        <div class="goal-card-desc">Make a significant push toward Black Hat &mdash; get the right people in the room to ship key work, expand customer POVs, and walk away with real momentum.</div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-card-title">Team Bonding</div>
+        <div class="goal-card-desc">Strengthen relationships across the team through shared experiences, from focused work sessions to a sunset boat cruise.</div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-card-title">Alignment</div>
+        <div class="goal-card-desc">Identify and resolve the key cross-functional decisions that require the full team in one room.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WEATHER -->
+<section id="weather">
+  <div class="container">
+    <p class="section-label">San Diego Forecast</p>
+    <h2 class="section-heading">Weather</h2>
+    <p class="section-sub">San Diego in June &mdash; warm, sunny, and dry. Light layers for evenings.</p>
+    <div class="weather-row">
+      <div class="wcard"><div class="wday">Sun</div><div class="wdate">Jun 7</div><div class="wtemp">69&deg;</div><div class="wcond">Sunny</div></div>
+      <div class="wcard"><div class="wday">Mon</div><div class="wdate">Jun 8</div><div class="wtemp">70&deg;</div><div class="wcond">Partly Cloudy</div></div>
+      <div class="wcard"><div class="wday">Tue</div><div class="wdate">Jun 9</div><div class="wtemp">72&deg;</div><div class="wcond">Sunny</div></div>
+      <div class="wcard offsite"><div class="wday">Wed</div><div class="wdate">Jun 10</div><div class="wtemp">73&deg;</div><div class="wcond">Sunny</div><div class="wlabel">Offsite</div></div>
+      <div class="wcard offsite"><div class="wday">Thu</div><div class="wdate">Jun 11</div><div class="wtemp">74&deg;</div><div class="wcond">Clear</div><div class="wlabel">Offsite</div></div>
+      <div class="wcard offsite"><div class="wday">Fri</div><div class="wdate">Jun 12</div><div class="wtemp">72&deg;</div><div class="wcond">Sunny</div><div class="wlabel">Offsite</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- AGENDA -->
+<section id="agenda">
+  <div class="container">
+    <p class="section-label">Day by Day</p>
+    <h2 class="section-heading">Agenda</h2>
+    <div class="day-nav">
+      <button class="day-btn active" onclick="showDay('sun',this)">Sun 6/7</button>
+      <button class="day-btn" onclick="showDay('mon',this)">Mon 6/8</button>
+      <button class="day-btn" onclick="showDay('tue',this)">Tue 6/9</button>
+      <button class="day-btn offsite-btn" onclick="showDay('wed',this)">Wed 6/10</button>
+      <button class="day-btn offsite-btn" onclick="showDay('thu',this)">Thu 6/11</button>
+      <button class="day-btn offsite-btn" onclick="showDay('fri',this)">Fri 6/12</button>
+    </div>
+
+    <!-- SUN -->
+    <div class="day-view active" id="dv-sun">
+      <div class="day-hdr"><span class="day-title-text">Sunday, June 7</span><span class="day-type-badge badge-arrive">Arrivals Day</span></div>
+      <div class="day-note-bar">Early crew arrives and gets settled. Hotel check-in from 4:00 PM.</div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">All Day</span><span class="atitle">Arrivals &amp; Hotel Check-in</span><span class="atag t-travel">Travel</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Alma San Diego Downtown</span></div><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Check-in from 4:00 PM</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">7:00 &ndash; 8:30 PM</span><span class="atitle">Dinner &mdash; El Agave</span><span class="atag t-food">Dinner</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">El Agave Mexican Restaurant</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 PM+</span><span class="atitle">Work / Socialize</span><span class="atag t-social">Social</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Individually organized</span></div></div></div></div>
+    </div>
+
+    <!-- MON -->
+    <div class="day-view" id="dv-mon">
+      <div class="day-hdr"><span class="day-title-text">Monday, June 8</span><span class="day-type-badge badge-cowork">Co-working Day 1</span></div>
+      <div class="day-note-bar">No activities planned &mdash; suggest something in the offsite GC and see who wants to join!</div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">8:00 &ndash; 9:00 AM</span><span class="atitle">Breakfast</span><span class="atag t-food">Breakfast</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Hotel &mdash; Atrium</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 AM &ndash; 12:00 PM</span><span class="atitle">Morning Work Sessions</span><span class="atag t-session">Work</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Rosario Room + Elena Room</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">12:00 &ndash; 1:00 PM</span><span class="atitle">Lunch</span><span class="atag t-food">Lunch</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Hotel &mdash; Atrium</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">1:00 &ndash; 6:00 PM</span><span class="atitle">Afternoon Work Sessions</span><span class="atag t-session">Work</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Rosario Room + Elena Room</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">6:15 &ndash; 6:30 PM</span><span class="atitle">Transportation to Dinner</span><span class="atag t-travel">Transit</span><span class="achevron">&#9660;</span></button><div class="agenda-body"></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">6:30 &ndash; 8:30 PM</span><span class="atitle">Dinner &mdash; Barbusa Italian Restaurant</span><span class="atag t-food">Dinner</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Barbusa</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 PM+</span><span class="atitle">Work / Socialize</span><span class="atag t-social">Social</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Individually organized</span></div></div></div></div>
+    </div>
+
+    <!-- TUE -->
+    <div class="day-view" id="dv-tue">
+      <div class="day-hdr"><span class="day-title-text">Tuesday, June 9</span><span class="day-type-badge badge-cowork">Co-working Day 2</span></div>
+      <div class="day-note-bar">No activities planned &mdash; suggest something in the offsite GC and see who wants to join!</div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">8:00 &ndash; 9:00 AM</span><span class="atitle">Breakfast</span><span class="atag t-food">Breakfast</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Hotel &mdash; Atrium</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 AM &ndash; 12:00 PM</span><span class="atitle">Work Sessions &amp; General Session</span><span class="atag t-session">Work</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">12:00 &ndash; 1:00 PM</span><span class="atitle">Lunch</span><span class="atag t-food">Lunch</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Uber Eats</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">1:00 &ndash; 6:00 PM</span><span class="atitle">Work Sessions &amp; General Session</span><span class="atag t-session">Work</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">6:15 &ndash; 6:30 PM</span><span class="atitle">Transportation to Dinner</span><span class="atag t-travel">Transit</span><span class="achevron">&#9660;</span></button><div class="agenda-body"></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">6:30 &ndash; 8:30 PM</span><span class="atitle">Dinner &mdash; Ballast Point Brewery</span><span class="atag t-food">Dinner</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Ballast Point Brewery</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 PM+</span><span class="atitle">Work / Socialize</span><span class="atag t-social">Social</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Individually organized</span></div></div></div></div>
+    </div>
+
+    <!-- WED -->
+    <div class="day-view" id="dv-wed">
+      <div class="day-hdr"><span class="day-title-text">Wednesday, June 10</span><span class="day-type-badge badge-offsite">Offsite Day 1</span></div>
+      <div class="day-goal-bar">Goal &mdash; Alignment</div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">8:00 &ndash; 9:00 AM</span><span class="atitle">Breakfast</span><span class="atag t-food">Breakfast</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Atrium</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 &ndash; 9:30 AM</span><span class="atitle">Welcome Session</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Thanos, Grace</span></div><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div><ul class="agenda-bullets"><li>Set expectations for the next few days</li><li>Go over agenda</li><li>New joiner intros (Vicky)</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:30 &ndash; 10:00 AM</span><span class="atitle">The 2026 Vision</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Vineet, Geng</span></div></div><ul class="agenda-bullets"><li>Review the opportunity on the table</li><li>Share the vision for where we want to be by end of 2026</li><li>Short &amp; medium term priorities</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">10:00 &ndash; 10:30 AM</span><span class="atitle">Cogent: An Honest Assessment</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Vineet</span></div></div><ul class="agenda-bullets"><li>Highlights &amp; things to celebrate from H1</li><li>Critical assessment of where we are falling short</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">10:30 &ndash; 11:15 AM</span><span class="atitle">Functional Updates: What&rsquo;s Next</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">By Function</span></div></div><ul class="agenda-bullets"><li>Sales / Growth: New pipeline &amp; initiatives (e.g., cyber advisory board)</li><li>Customer Success: New deployments &amp; rolling out critical features</li><li>EPD: Roadmap for H2</li><li>Research</li><li>Marketing</li><li>People</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">11:15 &ndash; 11:30 AM</span><span class="atitle">Break</span><span class="atag t-social">Break</span><span class="achevron">&#9660;</span></button><div class="agenda-body"></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">11:30 AM &ndash; 12:00 PM</span><span class="atitle">Guest Speaker: Jesse Zhang, CEO, Decagon</span><span class="atag t-speaker">Speaker</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Hosted by</span><span class="meta-val">Vineet</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">12:00 &ndash; 1:00 PM</span><span class="atitle">Lunch</span><span class="atag t-food">Lunch</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Atrium</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">1:00 &ndash; 2:00 PM</span><span class="atitle">Improving CogentOS</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Grace</span></div><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div><div style="background:#fffbeb;border:1.5px solid var(--peach);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:13px;color:var(--text);"><strong style="color:var(--peach);">Your small group is pre-assigned!</strong> Head to the <a href="#groups" style="color:var(--mid);font-weight:600;">Groups section</a> or search your name to find your group number and teammates before this session.</div><ul class="agenda-bullets"><li>15 min: Where are we getting blocked in growth &amp; velocity?</li><li>15 min: What does the optimal state look like?</li><li>30 min: How do we get from current to future state?</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">2:00 &ndash; 2:45 PM</span><span class="atitle">Share Out</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Grace</span></div></div><ul class="agenda-bullets"><li>Each group shares 2&ndash;3 key findings &amp; solutions to implement</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">2:45 &ndash; 3:00 PM</span><span class="atitle">Break</span><span class="atag t-social">Break</span><span class="achevron">&#9660;</span></button><div class="agenda-body"></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">3:00 &ndash; 4:00 PM</span><span class="atitle">Eng Enablement Session #1</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Geng</span></div><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Non-Eng: Working Time</span></div></div><ul class="agenda-bullets"><li>Productivity Maxxing &amp; Workflow Sharing</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">4:00 &ndash; 5:00 PM</span><span class="atitle">Eng Enablement Session #2</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Geng</span></div><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Non-Eng: Working Time</span></div></div><ul class="agenda-bullets"><li>Bugs &amp; Tactics to improve stability</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">5:00 &ndash; 5:45 PM</span><span class="atitle">SE Leads &lt;&gt; Data Platform Leads</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">DRI</span><span class="meta-val">Thanos</span></div><div class="meta-item"><span class="meta-label">Participants</span><span class="meta-val">Peyman, Vinay, Ryan, Aziz</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">5:45 &ndash; 6:30 PM</span><span class="atitle">Product Readiness: PM &lt;&gt; PMM &lt;&gt; SE</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">DRI</span><span class="meta-val">Vineet</span></div><div class="meta-item"><span class="meta-label">Participants</span><span class="meta-val">Geng, Aziz, Cam</span></div><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Others: Working Time</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">5:30 &ndash; 6:30 PM</span><span class="atitle">Cocktail Reception</span><span class="atag t-social">Reception</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Leave of Absence (Level 2)</span></div><div class="meta-item"><span class="meta-label">Note</span><span class="meta-val">Level II Bar &mdash; first drink hosted</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">6:45 &ndash; 7:00 PM</span><span class="atitle">Transportation to Dinner</span><span class="atag t-travel">Transit</span><span class="achevron">&#9660;</span></button><div class="agenda-body"></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">7:00 &ndash; 9:30 PM</span><span class="atitle">Welcome Dinner</span><span class="atag t-food">Dinner</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Luce Loft</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">10:00 PM+</span><span class="atitle">Late Night Bonding (Optional)</span><span class="atag t-social">Optional</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Arcade Monsters</span></div></div></div></div>
+    </div>
+
+    <!-- THU -->
+    <div class="day-view" id="dv-thu">
+      <div class="day-hdr"><span class="day-title-text">Thursday, June 11</span><span class="day-type-badge badge-offsite">Offsite Day 2</span></div>
+      <div class="day-goal-bar">Goal &mdash; Build</div>
+      <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
+        <button onclick="filterThu('all',this)" class="thu-btn" style="padding:8px 18px;border-radius:8px;border:1.5px solid var(--deep);background:var(--deep);color:white;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;">All</button>
+        <button onclick="filterThu('eng',this)" class="thu-btn" style="padding:8px 18px;border-radius:8px;border:1.5px solid var(--border);background:white;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;">Eng</button>
+        <button onclick="filterThu('gtm',this)" class="thu-btn" style="padding:8px 18px;border-radius:8px;border:1.5px solid var(--border);background:white;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;">GTM</button>
+        <button onclick="filterThu('ga',this)" class="thu-btn" style="padding:8px 18px;border-radius:8px;border:1.5px solid var(--border);background:white;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;">G&amp;A</button>
+      </div>
+
+
+      <div class="agenda-item" style="border:1.5px solid #fde8c8;border-radius:14px;margin-bottom:16px;overflow:hidden;">
+        <button class="agenda-trigger" onclick="toggle(this)" style="background:#fff8f0;">
+          <span class="atime">10 AM &ndash; 2 PM</span>
+          <span class="atitle">Headshot Schedule <span style="font-size:12px;font-weight:400;color:var(--muted);">Elena Room &mdash; click to view your slot</span></span>
+          <span class="atag" style="background:#fde8c8;color:#b45309;font-size:10px;font-weight:700;padding:3px 10px;border-radius:50px;letter-spacing:0.5px;text-transform:uppercase;flex-shrink:0;">Headshots</span>
+          <span class="achevron">&#9660;</span>
+        </button>
+        <div class="agenda-body">
+          <p style="font-size:13px;color:var(--muted);margin:12px 0 16px;">Find your name and head to the <strong>Elena Room</strong> at your assigned time. Running simultaneously with the main programming schedule.</p>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div style="background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(11,37,69,0.07);border-top:4px solid var(--teal);">
+              <div style="padding:14px 16px;background:#f0fafa;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--deep);">G&amp;A</span>
+                <span style="font-size:12px;color:var(--muted);">10:00 &ndash; 11:00 AM &middot; Elena Room</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Annie Na</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">10:00 AM &ndash; 10:12 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Grace Hua</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">10:12 AM &ndash; 10:24 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Hyun Kim</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">10:24 AM &ndash; 10:36 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Sourabh Katti</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">10:36 AM &ndash; 10:48 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Victoria Lin</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">10:48 AM &ndash; 11:00 AM</span></div>
+
+            </div>
+            <div style="background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(11,37,69,0.07);border-top:4px solid var(--bright);">
+              <div style="padding:14px 16px;background:var(--sky);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--deep);">Eng &mdash; Part 1</span>
+                <span style="font-size:12px;color:var(--muted);">11:00 AM &ndash; 12:00 PM &middot; Elena Room</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Anirudh Ravula</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:00 AM &ndash; 11:03 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Chaitanya Manchikanti</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:03 AM &ndash; 11:06 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Geng Sng</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:06 AM &ndash; 11:09 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Henry Yi</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:09 AM &ndash; 11:12 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Hiep Chu</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:12 AM &ndash; 11:15 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Jeremy Kao</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:15 AM &ndash; 11:18 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Jia Zeng</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:18 AM &ndash; 11:21 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Joseph Jin</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:21 AM &ndash; 11:24 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Justin Whitcomb</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:24 AM &ndash; 11:27 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Karan Gugle</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:27 AM &ndash; 11:30 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Larsen Weigle</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:30 AM &ndash; 11:33 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Marco Schwiebert</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:33 AM &ndash; 11:36 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Mariam McLellan</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:36 AM &ndash; 11:39 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Max Mikhaylov</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:39 AM &ndash; 11:42 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Neil Joshi</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:42 AM &ndash; 11:45 AM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Nina Boord</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">11:45 AM &ndash; 11:48 AM</span></div>
+
+            </div>
+            <div style="background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(11,37,69,0.07);border-top:4px solid var(--peach);">
+              <div style="padding:14px 16px;background:#fff8f0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--deep);">GTM / Sales</span>
+                <span style="font-size:12px;color:var(--muted);">12:00 &ndash; 1:00 PM &middot; Elena Room</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Alexander Semien</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:00 PM &ndash; 12:05 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Andrew Cuzzone</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:05 PM &ndash; 12:10 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Aziz Kapadia</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:10 PM &ndash; 12:15 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Brian Ruth</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:15 PM &ndash; 12:20 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Cameron Coles</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:20 PM &ndash; 12:25 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Haris Sohail</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:25 PM &ndash; 12:30 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Justin Jancaric</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:30 PM &ndash; 12:35 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Lauren England</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:35 PM &ndash; 12:40 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Rebecca Brock</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:40 PM &ndash; 12:45 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Ryan Marasco</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:45 PM &ndash; 12:50 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Sri Maddineni</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:50 PM &ndash; 12:55 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Traci Byrne</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">12:55 PM &ndash; 1:00 PM</span></div>
+
+            </div>
+            <div style="background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(11,37,69,0.07);border-top:4px solid var(--bright);">
+              <div style="padding:14px 16px;background:var(--sky);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--deep);">Eng &mdash; Part 2</span>
+                <span style="font-size:12px;color:var(--muted);">1:00 &ndash; 2:00 PM &middot; Elena Room</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Peyman Manikashani</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:00 PM &ndash; 1:03 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Riya Chakraborty</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:03 PM &ndash; 1:06 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Rodrigo Alves Vieira</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:06 PM &ndash; 1:09 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Sagar Maheshwari</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:09 PM &ndash; 1:12 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Sara Reddy</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:12 PM &ndash; 1:15 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Simon Weigl</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:15 PM &ndash; 1:18 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Sophia Wu</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:18 PM &ndash; 1:21 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Stan Liu</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:21 PM &ndash; 1:24 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Steven Do</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:24 PM &ndash; 1:27 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Thanos Baskous</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:27 PM &ndash; 1:30 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Vignesh Shankar</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:30 PM &ndash; 1:33 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Vinay Padma</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:33 PM &ndash; 1:36 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Vineet Edupuganti</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:36 PM &ndash; 1:39 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Yaoyang Lin</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:39 PM &ndash; 1:42 PM</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);"><span style="font-size:14px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:12px;">Yash Jain</span><span style="font-size:12px;color:var(--mid);font-weight:600;white-space:nowrap;background:var(--sky);padding:3px 10px;border-radius:50px;flex-shrink:0;">1:42 PM &ndash; 1:45 PM</span></div>
+
+            </div>
+          </div>
+                </div>
+      </div>
+      <div class="agenda-item" data-thu="shared"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">8:00 &ndash; 9:00 AM</span><span class="atitle">Breakfast</span><span class="atag t-food">Breakfast</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Atrium</span></div></div></div></div>
+      <div class="agenda-item" data-thu="eng"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 AM &ndash; 12:00 PM</span><span class="atitle">Build Day: Migrations</span><span class="atag t-session" style="background:#dbeafe;color:#1d4ed8;">Eng</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">DRI</span><span class="meta-val">Thanos</span></div><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div><ul class="agenda-bullets"><li>KG provenance migration push</li><li>FDE onboarding for cloud agents</li></ul></div></div>
+      <div class="agenda-item" data-thu="gtm"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 AM &ndash; 12:00 PM</span><span class="atitle">Product Enablement Sessions</span><span class="atag t-session" style="background:#dcfce7;color:#166534;">GTM</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div><ul class="agenda-bullets"><li><strong>9:00 &ndash; 10:00 AM:</strong> Product Positioning Enablement &mdash; DRI: Vineet, Geng</li><li><strong>10:00 &ndash; 11:00 AM:</strong> Product Capabilities Enablement &mdash; DRI: Geng</li><li><strong>11:00 AM &ndash; 12:00 PM:</strong> POV Scoping &mdash; DRI: Geng</li></ul></div></div>
+      <div class="agenda-item" data-thu="ga"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 AM &ndash; 12:00 PM</span><span class="atitle">Nontechnical Hackathon Day</span><span class="atag t-session" style="background:#ede9fe;color:#6d28d9;">G&amp;A</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div></div></div>
+      <div class="agenda-item" data-thu="shared"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">12:00 &ndash; 1:00 PM</span><span class="atitle">Lunch</span><span class="atag t-food">Lunch</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Atrium</span></div></div></div></div>
+      <div class="agenda-item" data-thu="eng"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">1:00 &ndash; 6:00 PM</span><span class="atitle">Build Day: Migrations (continued)</span><span class="atag t-session" style="background:#dbeafe;color:#1d4ed8;">Eng</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">DRI</span><span class="meta-val">Thanos</span></div></div></div></div>
+      <div class="agenda-item" data-thu="gtm"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">1:00 &ndash; 6:45 PM</span><span class="atitle">Pipeline &amp; Sales Sessions</span><span class="atag t-session" style="background:#dcfce7;color:#166534;">GTM</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div><ul class="agenda-bullets"><li><strong>1:00 &ndash; 1:15 PM:</strong> Guest Speaker: Jeff Williams, BCV</li><li><strong>1:15 &ndash; 1:45 PM:</strong> Hubspot &amp; Sales Process Training &mdash; DRI: Alex</li><li><strong>1:45 &ndash; 3:00 PM:</strong> Hygiene &amp; Cleanup &mdash; DRI: Alex</li><li><strong>3:00 &ndash; 4:00 PM:</strong> Target Accounts Review &mdash; DRI: Alex</li><li><strong>4:00 &ndash; 6:00 PM:</strong> Pipeline Push &mdash; DRI: Alex</li><li><strong>6:00 &ndash; 6:45 PM:</strong> Referral Jam &mdash; DRI: Stedo &mdash; All AEs, SEs, Growth, Marketing</li></ul></div></div>
+      <div class="agenda-item" data-thu="ga"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">1:00 &ndash; 6:00 PM</span><span class="atitle">Nontechnical Hackathon Day (continued)</span><span class="atag t-session" style="background:#ede9fe;color:#6d28d9;">G&amp;A</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div><ul class="agenda-bullets"><li><strong>1:00 &ndash; 2:00 PM:</strong> Customer Deployment &mdash; DRI: Lauren &mdash; Participants: Geng, Haris, Sourabh</li></ul></div></div>
+      <div class="agenda-item" data-thu="shared"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">6:00 &ndash; 6:45 PM</span><span class="atitle">Individual Time</span><span class="atag t-social">Break</span><span class="achevron">&#9660;</span></button><div class="agenda-body"></div></div>
+      <div class="agenda-item" data-thu="shared"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">6:45 &ndash; 7:00 PM</span><span class="atitle">Transportation to Dinner</span><span class="atag t-travel">Transit</span><span class="achevron">&#9660;</span></button><div class="agenda-body"></div></div>
+      <div class="agenda-item" data-thu="shared"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">7:00 &ndash; 10:00 PM</span><span class="atitle">Dinner &mdash; Coasterra</span><span class="atag t-food">Dinner</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Coasterra &mdash; Waterfront</span></div></div></div></div>
+      <div class="agenda-item" data-thu="shared"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">10:00 PM+</span><span class="atitle">Late Night Bonding (Optional)</span><span class="atag t-social">Optional</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Karaoke</span></div></div></div></div>
+    </div>
+
+    <!-- FRI -->
+    <div class="day-view" id="dv-fri">
+      <div class="day-hdr"><span class="day-title-text">Friday, June 12</span><span class="day-type-badge badge-offsite">Offsite Day 3</span></div>
+      <div class="day-goal-bar">Accomplishment Closeout</div>
+      <div class="day-note-bar">Check-out at 11:00 AM &mdash; bring bags to the Octavio Ballroom before the morning session.</div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">8:00 &ndash; 9:00 AM</span><span class="atitle">Breakfast</span><span class="atag t-food">Breakfast</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Atrium</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:00 &ndash; 9:30 AM</span><span class="atitle">Guest Speaker: Lucas Moody, CISO, Astera Labs</span><span class="atag t-speaker">Speaker</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Hosted by</span><span class="meta-val">Vineet</span></div><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">9:30 &ndash; 10:00 AM</span><span class="atitle">Working Session</span><span class="atag t-session">Session</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Traci</span></div><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div><ul class="agenda-bullets"><li>Last minute cross-functional conversations</li><li>Wrap up any outstanding work</li><li><strong>GTM:</strong> Channel &amp; Partner Relationships &mdash; DRI: Traci</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">10:00 &ndash; 11:00 AM</span><span class="atitle">Hackathon Presentations &amp; Share Out</span><span class="atag t-act">Hackathon</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Presenter</span><span class="meta-val">Vineet</span></div><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Octavio Ballroom</span></div></div><ul class="agenda-bullets"><li>Hackathon presentations with judges &amp; prizes</li><li><strong>Eng:</strong> Share outcomes of migration</li><li><strong>GTM:</strong> Share pipeline velocity outcomes</li><li><strong>G&amp;A:</strong> Share what was built during hackathon</li><li>Vineet to wrap up</li></ul></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">11:00 AM &ndash; 12:00 PM</span><span class="atitle">Lunch</span><span class="atag t-food">Lunch</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">Atrium</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">12:15 &ndash; 1:00 PM</span><span class="atitle">Transportation to Marina + Check In</span><span class="atag t-travel">Transit</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">San Diego Marina</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">1:00 &ndash; 3:00 PM</span><span class="atitle">Boat Cruise</span><span class="atag t-act">Activity</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">San Diego Bay</span></div></div></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">3:15 &ndash; 3:45 PM</span><span class="atitle">Transportation Back</span><span class="atag t-travel">Transit</span><span class="achevron">&#9660;</span></button><div class="agenda-body"></div></div>
+      <div class="agenda-item"><button class="agenda-trigger" onclick="toggle(this)"><span class="atime">5:00 PM+</span><span class="atitle">Departures &mdash; Flights out after 5 PM</span><span class="atag t-travel">Depart</span><span class="achevron">&#9660;</span></button><div class="agenda-body"><div class="agenda-meta"><div class="meta-item"><span class="meta-label">Location</span><span class="meta-val">San Diego International Airport</span></div></div></div></div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- GROUPS -->
+<section id="groups">
+  <div class="container">
+    <p class="section-label">Wednesday, June 10</p>
+    <h2 class="section-heading">Your Small Group</h2>
+    <p style="color:var(--muted);font-size:14px;margin-top:-28px;margin-bottom:32px;">Find your name to see your group for the Improving CogentOS working session. Groups are cross-functional.</p>
+    <div style="position:relative;margin-bottom:32px;">
+      <input id="group-search" type="text" placeholder="Type your name to find your group..." oninput="searchGroup(this.value)"
+        style="width:100%;padding:14px 20px;border:2px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);outline:none;background:white;"
+        onfocus="this.style.borderColor='var(--mid)'" onblur="this.style.borderColor='var(--border)'"/>
+    </div>
+    <div id="group-result" style="display:none;margin-bottom:32px;"></div>
+    <div id="all-groups" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+      <div class="gcard" data-group="1"><div class="gcard-header" style="background:linear-gradient(135deg,#0b2545,#1a6ea8);"><span class="gnum">Group 1</span></div><ul class="gmembers"><li><span class="gname">Peyman Manikashani</span><span class="grole">Eng &mdash; Data Platform</span></li><li><span class="gname">Karan Gugle</span><span class="grole">Eng &mdash; Agents</span></li><li><span class="gname">Neil Joshi</span><span class="grole">Eng &mdash; Infra / Security</span></li><li><span class="gname">Aziz Kapadia</span><span class="grole">Sales Engineer</span></li><li><span class="gname">Grace Hua</span><span class="grole">BizOps</span></li></ul></div>
+      <div class="gcard" data-group="2"><div class="gcard-header" style="background:linear-gradient(135deg,#1a6ea8,#2eb8e6);"><span class="gnum">Group 2</span></div><ul class="gmembers"><li><span class="gname">Vignesh Shankar</span><span class="grole">Eng &mdash; Data Platform</span></li><li><span class="gname">Sophia Wu</span><span class="grole">Eng &mdash; Agents</span></li><li><span class="gname">Joseph Jin</span><span class="grole">Eng &mdash; FDE</span></li><li><span class="gname">Brian Ruth</span><span class="grole">Account Executive</span></li><li><span class="gname">Lauren England</span><span class="grole">Customer Success</span></li><li><span class="gname">Jeremy Kao</span><span class="grole">Eng</span></li></ul></div>
+      <div class="gcard" data-group="3"><div class="gcard-header" style="background:linear-gradient(135deg,#0fa3b1,#2eb8e6);"><span class="gnum">Group 3</span></div><ul class="gmembers"><li><span class="gname">Simon Weigl</span><span class="grole">Eng &mdash; Data Platform</span></li><li><span class="gname">Larsen Weigle</span><span class="grole">Eng &mdash; AI Platform</span></li><li><span class="gname">Chaitanya Manchikanti</span><span class="grole">Eng &mdash; Infra / Security</span></li><li><span class="gname">Justin Whitcomb</span><span class="grole">Account Executive</span></li><li><span class="gname">Alexander Semien</span><span class="grole">Growth</span></li></ul></div>
+      <div class="gcard" data-group="4"><div class="gcard-header" style="background:linear-gradient(135deg,#2d6a4f,#40916c);"><span class="gnum">Group 4</span></div><ul class="gmembers"><li><span class="gname">Vinay Padma</span><span class="grole">Eng &mdash; Data Platform</span></li><li><span class="gname">Akash Mahesh</span><span class="grole">Eng &mdash; Agents</span></li><li><span class="gname">Yash Jain</span><span class="grole">Eng &mdash; FDE</span></li><li><span class="gname">Ryan Marasco</span><span class="grole">Sales Engineer</span></li><li><span class="gname">Haris Sohail</span><span class="grole">Product Management</span></li></ul></div>
+      <div class="gcard" data-group="5"><div class="gcard-header" style="background:linear-gradient(135deg,#6d28d9,#a78bfa);"><span class="gnum">Group 5</span></div><ul class="gmembers"><li><span class="gname">Max Mikhaylov</span><span class="grole">Eng &mdash; Data Platform</span></li><li><span class="gname">Jia Zeng</span><span class="grole">Eng &mdash; AI Platform</span></li><li><span class="gname">Mariam McLellan</span><span class="grole">Eng &mdash; Infra / Security</span></li><li><span class="gname">Cameron Coles</span><span class="grole">Marketing</span></li><li><span class="gname">Traci Byrne</span><span class="grole">Sales &mdash; Partnerships</span></li></ul></div>
+      <div class="gcard" data-group="6"><div class="gcard-header" style="background:linear-gradient(135deg,#b45309,#f59e0b);"><span class="gnum">Group 6</span></div><ul class="gmembers"><li><span class="gname">Sara Reddy</span><span class="grole">Eng &mdash; Data Platform</span></li><li><span class="gname">Marco Schwiebert</span><span class="grole">Eng &mdash; Agents</span></li><li><span class="gname">Hiep Chu</span><span class="grole">Eng &mdash; Research</span></li><li><span class="gname">Sri Maddineni</span><span class="grole">Sales Engineer</span></li><li><span class="gname">Steven Do</span><span class="grole">Recruiting</span></li></ul></div>
+      <div class="gcard" data-group="7"><div class="gcard-header" style="background:linear-gradient(135deg,#be185d,#f472b6);"><span class="gnum">Group 7</span></div><ul class="gmembers"><li><span class="gname">Rodrigo Alves Vieira</span><span class="grole">Eng &mdash; Data Platform</span></li><li><span class="gname">Henry Yi</span><span class="grole">Eng &mdash; AI Platform</span></li><li><span class="gname">Nina Boord</span><span class="grole">Eng &mdash; FDE</span></li><li><span class="gname">Justin Jancaric</span><span class="grole">Account Executive</span></li><li><span class="gname">Sourabh Katti</span><span class="grole">Product Manager</span></li></ul></div>
+      <div class="gcard" data-group="8"><div class="gcard-header" style="background:linear-gradient(135deg,#0e7490,#06b6d4);"><span class="gnum">Group 8</span></div><ul class="gmembers"><li><span class="gname">Riya Chakraborty</span><span class="grole">Eng &mdash; Data Platform</span></li><li><span class="gname">Sagar Maheshwari</span><span class="grole">Eng &mdash; AI Platform</span></li><li><span class="gname">Stan Liu</span><span class="grole">Eng &mdash; Agents</span></li><li><span class="gname">Hyun Kim</span><span class="grole">Design</span></li></ul></div>
+      <div class="gcard" data-group="9"><div class="gcard-header" style="background:linear-gradient(135deg,#991b1b,#ef4444);"><span class="gnum">Group 9</span></div><ul class="gmembers"><li><span class="gname">Anirudh Ravula</span><span class="grole">Eng &mdash; AI Platform</span></li><li><span class="gname">Yaoyang Lin</span><span class="grole">Eng &mdash; AI Platform</span></li><li><span class="gname">Annie Na</span><span class="grole">Ops</span></li><li><span class="gname">Rebecca Brock</span><span class="grole">Account Executive</span></li><li><span class="gname">Andrew Cuzzone</span><span class="grole">Growth</span></li></ul></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gcard { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(11,37,69,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+  .gcard:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(11,37,69,0.14); }
+  .gcard.highlight { box-shadow: 0 0 0 3px var(--peach), 0 8px 28px rgba(11,37,69,0.2); transform: translateY(-4px); }
+  .gcard-header { padding: 16px 20px; }
+  .gnum { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: white; }
+  .gmembers { list-style: none; padding: 12px 0; }
+  .gmembers li { padding: 10px 20px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 2px; transition: background 0.15s; }
+  .gmembers li:last-child { border-bottom: none; }
+  .gmembers li:hover { background: var(--sky); }
+  .gmembers li.me { background: #fffbeb; }
+  .gname { font-size: 14px; font-weight: 600; color: var(--text); }
+  .grole { font-size: 12px; color: var(--muted); }
+  #group-result .result-card { background: linear-gradient(135deg, var(--deep), var(--mid)); border-radius: 16px; padding: 28px 32px; color: white; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  #group-result .result-group-num { font-family: 'Fraunces', serif; font-size: 64px; font-weight: 900; color: var(--peach); line-height: 1; flex-shrink: 0; }
+  #group-result .result-info { flex: 1; }
+  #group-result .result-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--mint); margin-bottom: 4px; }
+  #group-result .result-name { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; margin-bottom: 4px; }
+  #group-result .result-role { font-size: 14px; color: var(--mint); margin-bottom: 16px; }
+  #group-result .result-members { display: flex; flex-wrap: wrap; gap: 8px; }
+  #group-result .result-member { background: rgba(255,255,255,0.12); border-radius: 50px; padding: 4px 14px; font-size: 13px; color: white; }
+  #group-result .result-member.is-you { background: var(--peach); color: white; font-weight: 600; }
+</style>
+
+<hr class="divider">
+
+<!-- PACKING -->
+<section id="packing">
+  <div class="container">
+    <p class="section-label">What to Bring</p>
+    <h2 class="section-heading">Packing List</h2>
+    <div class="pack-grid">
+      <div class="pack-card">
+        <div class="pack-card-title">Work Essentials</div>
+        <ul class="pack-list">
+          <li>Laptop &amp; charger</li>
+          <li>Phone &amp; charger / power bank</li>
+          <li>Headphones / earbuds</li>
+          <li>Laptop stand / accessories</li>
+          <li>Government-issued ID</li>
+        </ul>
+      </div>
+      <div class="pack-card">
+        <div class="pack-card-title">Clothing</div>
+        <ul class="pack-list">
+          <li>Outfit for dinner each evening<div class="pack-note">Smart casual &mdash; light layers for evenings near the water</div></li>
+          <li>Activewear</li>
+          <li>Swimwear<div class="pack-note">Boat cruise on Friday</div></li>
+          <li>Light jacket or hoodie<div class="pack-note">Evenings can be breezy near the water</div></li>
+          <li>Comfortable walking shoes</li>
+          <li>Sunglasses</li>
+          <li>Hat or cap<div class="pack-note">San Diego sun is strong, especially on the boat</div></li>
+        </ul>
+      </div>
+      <div class="pack-card">
+        <div class="pack-card-title">Toiletries</div>
+        <ul class="pack-list">
+          <li>Toothbrush &amp; toothpaste</li>
+          <li>Deodorant</li>
+          <li>Face wash &amp; skincare</li>
+          <li>Sunscreen<div class="pack-note">Lots of outdoor time</div></li>
+          <li>Any prescription medications</li>
+          <li>Pain reliever / basic first aid</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong style="font-family:'Fraunces',serif;font-size:20px;display:block;margin-bottom:6px;color:white;">Cogent SD Offsite</strong>
+  <p>SD Offsite 2026 &middot; June 7&ndash;12 &middot; San Diego, CA &middot; Questions? Reach out in Slack <strong style="color:white;">#offsite-2026-q2</strong></p>
+</footer>
+
+<script>
+function showDay(id, btn) {
+  document.querySelectorAll('.day-view').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('dv-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggle(trigger) {
+  trigger.classList.toggle('open');
+  trigger.nextElementSibling.classList.toggle('open');
+}
+function filterThu(fn, btn) {
+  document.querySelectorAll('.thu-btn').forEach(b => {
+    b.style.background = 'white'; b.style.color = 'var(--muted)'; b.style.borderColor = 'var(--border)';
+  });
+  btn.style.background = 'var(--deep)'; btn.style.color = 'white'; btn.style.borderColor = 'var(--deep)';
+  document.querySelectorAll('[data-thu]').forEach(item => {
+    const t = item.getAttribute('data-thu');
+    item.style.display = (fn === 'all' || t === fn || t === 'shared') ? 'block' : 'none';
+  });
+}
+const members = [
+  {name:"Peyman Manikashani",role:"Eng — Data Platform",group:1},{name:"Karan Gugle",role:"Eng — Agents",group:1},{name:"Neil Joshi",role:"Eng — Infra / Security",group:1},{name:"Aziz Kapadia",role:"Sales Engineer",group:1},{name:"Grace Hua",role:"BizOps",group:1},
+  {name:"Vignesh Shankar",role:"Eng — Data Platform",group:2},{name:"Sophia Wu",role:"Eng — Agents",group:2},{name:"Joseph Jin",role:"Eng — FDE",group:2},{name:"Brian Ruth",role:"Account Executive",group:2},{name:"Lauren England",role:"Customer Success",group:2},{name:"Jeremy Kao",role:"Eng",group:2},
+  {name:"Simon Weigl",role:"Eng — Data Platform",group:3},{name:"Larsen Weigle",role:"Eng — AI Platform",group:3},{name:"Chaitanya Manchikanti",role:"Eng — Infra / Security",group:3},{name:"Justin Whitcomb",role:"Account Executive",group:3},{name:"Alexander Semien",role:"Growth",group:3},
+  {name:"Vinay Padma",role:"Eng — Data Platform",group:4},{name:"Akash Mahesh",role:"Eng — Agents",group:4},{name:"Yash Jain",role:"Eng — FDE",group:4},{name:"Ryan Marasco",role:"Sales Engineer",group:4},{name:"Haris Sohail",role:"Product Management",group:4},
+  {name:"Max Mikhaylov",role:"Eng — Data Platform",group:5},{name:"Jia Zeng",role:"Eng — AI Platform",group:5},{name:"Mariam McLellan",role:"Eng — Infra / Security",group:5},{name:"Cameron Coles",role:"Marketing",group:5},{name:"Traci Byrne",role:"Sales — Partnerships",group:5},
+  {name:"Sara Reddy",role:"Eng — Data Platform",group:6},{name:"Marco Schwiebert",role:"Eng — Agents",group:6},{name:"Hiep Chu",role:"Eng — Research",group:6},{name:"Sri Maddineni",role:"Sales Engineer",group:6},{name:"Steven Do",role:"Recruiting",group:6},
+  {name:"Rodrigo Alves Vieira",role:"Eng — Data Platform",group:7},{name:"Henry Yi",role:"Eng — AI Platform",group:7},{name:"Nina Boord",role:"Eng — FDE",group:7},{name:"Justin Jancaric",role:"Account Executive",group:7},{name:"Sourabh Katti",role:"Product Manager",group:7},
+  {name:"Riya Chakraborty",role:"Eng — Data Platform",group:8},{name:"Sagar Maheshwari",role:"Eng — AI Platform",group:8},{name:"Stan Liu",role:"Eng — Agents",group:8},{name:"Hyun Kim",role:"Design",group:8},
+  {name:"Anirudh Ravula",role:"Eng — AI Platform",group:9},{name:"Yaoyang Lin",role:"Eng — AI Platform",group:9},{name:"Annie Na",role:"Ops",group:9},{name:"Rebecca Brock",role:"Account Executive",group:9},{name:"Andrew Cuzzone",role:"Growth",group:9},
+];
+const groupMembers = (g) => members.filter(m => m.group === g);
+function searchGroup(val) {
+  const result = document.getElementById("group-result");
+  if (!val || val.length < 2) {
+    result.style.display = "none";
+    document.querySelectorAll(".gcard").forEach(c => { c.classList.remove("highlight"); c.style.opacity = "1"; });
+    document.querySelectorAll(".gmembers li").forEach(li => li.classList.remove("me"));
+    return;
+  }
+  const q = val.toLowerCase().trim();
+  const match = members.find(m => m.name.toLowerCase().includes(q));
+  if (match) {
+    const teammates = groupMembers(match.group).filter(m => m.name !== match.name);
+    result.innerHTML = `<div class="result-card"><div class="result-group-num">${match.group}</div><div class="result-info"><div class="result-label">Your Group Assignment</div><div class="result-name">${match.name}</div><div class="result-role">${match.role}</div><div class="result-members"><span class="result-member is-you">${match.name}</span>${teammates.map(t=>`<span class="result-member">${t.name}</span>`).join("")}</div></div></div>`;
+    result.style.display = "block";
+    document.querySelectorAll(".gcard").forEach(c => {
+      const isMatch = parseInt(c.dataset.group) === match.group;
+      c.classList.toggle("highlight", isMatch);
+      c.style.opacity = isMatch ? "1" : "0.4";
+    });
+    document.querySelectorAll(".gmembers li").forEach(li => {
+      const nameEl = li.querySelector(".gname");
+      if (nameEl && nameEl.textContent.trim() === match.name) li.classList.add("me");
+      else li.classList.remove("me");
+    });
+    const card = document.querySelector(`.gcard[data-group="${match.group}"]`);
+    if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+  } else {
+    result.innerHTML = `<div style="background:var(--sky);border-radius:12px;padding:20px 24px;color:var(--muted);font-size:14px;">No match found for "<strong>${val}</strong>" — try your first or last name.</div>`;
+    result.style.display = "block";
+    document.querySelectorAll(".gcard").forEach(c => { c.classList.remove("highlight"); c.style.opacity = "1"; });
+  }
+}
+</script>
+</body>
+</html>
